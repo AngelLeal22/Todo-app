@@ -31,9 +31,9 @@ app.use(cookieParser());
 // Rutas corregidas según la estructura real
 app.use('/', express.static(path.resolve('views', 'home')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));
-app.use('/signup', express.static(path.resolve('views', 'home', 'signup')));
-app.use('/login', express.static(path.resolve('views', 'home', 'login')));
-app.use('/components', express.static(path.resolve('views', 'home', 'components')));
+app.use('/signup', express.static(path.resolve('views', 'signup')));
+app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/Components', express.static(path.resolve('views','Components')));
 app.use('/img', express.static(path.resolve('img')));
 app.use("/verify/:id/:token",express.static(path.resolve("views", "verify")))
 
