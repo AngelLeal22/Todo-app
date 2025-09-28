@@ -33,7 +33,7 @@ app.use('/', express.static(path.resolve('views', 'home')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
-app.use('/Components', express.static(path.resolve('views','Components')));
+app.use('/components', express.static(path.resolve('views','Components')));
 app.use('/img', express.static(path.resolve('img')));
 app.use("/verify/:id/:token",express.static(path.resolve("views", "verify")))
 
