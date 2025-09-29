@@ -73,9 +73,6 @@ return res.status(201).json( "Usuario creado. Por Favor verificar tu correo elec
 
 
 usersRouter.patch('/:id/:token', async (req, res) => {
-
-  console.log("en el patch")
- 
     try {
         const token = req.params.token;
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -95,8 +92,8 @@ usersRouter.patch('/:id/:token', async (req, res) => {
         //Enviar el email
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            port: 587,
+            secure: false,
             auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
