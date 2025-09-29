@@ -10,9 +10,10 @@ const { request } = require('express');
 
 //para crear un nuevo usuario
 usersRouter.post('/', async (req, res) =>{
-    const {name, email, password} = req.body;
-    console.log(req.body)
-    
+  const {name, email, password} = req.body;
+  console.log(req.body);
+  
+  console.log("en el post");
 
     //validacion a nivel de backend
     if (!name || !email || !password) {
@@ -31,7 +32,7 @@ usersRouter.post('/', async (req, res) =>{
     // guardar el usuario en al base de datos con el metodo .save()
     const savedUser = await newUser.save();
     // para crear el token
-    const token = jwt.sign({ id: savedUser.id}, process.env.ACCESS_TOKEN_SECRET,{ expiresIn :"1m"} )
+    const token = jwt.sign({ id: savedUser.id}, process.env.ACCESS_TOKEN_SECRET,{ expiresIn :"1d"} )
     console.log(token)
 
     //envio del correo para verificar con nodemailer
@@ -72,14 +73,16 @@ return res.status(201).json( "Usuario creado. Por Favor verificar tu correo elec
 
 
 usersRouter.patch('/:id/:token', async (req, res) => {
+
+  console.log("en el patch")
  
     try {
         const token = req.params.token;
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         const id = decodedToken.id;
         await User.findByIdAndUpdate(id, { verified: true });
-        
-        return response.sendStatus(200)
+        // importante para que no quede en bucle, confirmar con res y no usar el response
+        return res.sendStatus(200)
     } catch (error) {
         //Encontra el email del usuario
         const id = req.params.id;
@@ -92,8 +95,8 @@ usersRouter.patch('/:id/:token', async (req, res) => {
         //Enviar el email
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            port: 587,
+            secure: false,
             auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
@@ -103,7 +106,7 @@ usersRouter.patch('/:id/:token', async (req, res) => {
     await transporter.sendMail({
         from: process.env.EMAIL_USER, // sender address
         to: email, // list of receivers
-        subject: "Verificación de usuario", // Subject line
+        subject: "Verificación de usuario GamerGames", // Subject line
         html: `<a href="${PAGE_URL}/verify/${id}/${token}">Verificar usuario</a>`, // html body
     })
 
