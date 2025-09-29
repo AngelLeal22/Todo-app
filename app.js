@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
+const todosRouter = require("./controllers/todos");
 const { MONGO_URI } = require("./config");
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/components', express.static(path.resolve('views','components')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/todos', express.static(path.resolve('views', 'todos')));
 app.use('/img', express.static(path.resolve('img')));
 app.use("/verify/:id/:token",express.static(path.resolve("views", "verify")))
 
@@ -45,6 +47,7 @@ app.use(morgan('tiny'));
 //RUTAS BACKEND
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/todos', todosRouter);
 
 module.exports = app;
 
