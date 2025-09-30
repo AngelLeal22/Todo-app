@@ -1,6 +1,6 @@
 const PAGE_URL = process.env.NODE_ENV === "production"
 //aqui va un link de render
-? "http://localhost:3000"
+? "https://todo-app-sxnl.onrender.com"
 : "http://localhost:3000";
 
 const MONGO_URI = process.env.NODE_ENV === "production"
