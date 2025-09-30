@@ -109,3 +109,22 @@ navBtn.addEventListener( "click", e =>{
     }
 })
 
+const closeBtnDesktop = navbar.children[0].children[3].children[0]
+const closeBtnMobile = navbar.children[0].children[2].children[0]
+
+closeBtnDesktop.addEventListener('click', async e => {
+    try {
+        await axios.get('/api/logout');
+        window.location.pathname = '/login';
+    } catch (error) {
+        console.log(error);
+    }
+})
+closeBtnMobile.addEventListener('click', async e => {
+    try {
+        await axios.get('/api/logout');
+        window.location.pathname = '/login';
+    } catch (error) {
+        console.log(error);
+    }
+})

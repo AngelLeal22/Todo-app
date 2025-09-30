@@ -7,8 +7,11 @@ const { response } = require("express");
 
 
 loginRouter.post("/", async (req,res) =>{
-    const { email, password} = req.body
-    const userExist = await User.findOne({email})
+    const { email, password} = req.body;
+    const userExist = await User.findOne({email});
+
+
+    console.log(  "este es el usuario existente", userExist)
    
 
     //para comprobar que los datos del usuario son los correctos

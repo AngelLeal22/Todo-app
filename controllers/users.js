@@ -10,6 +10,7 @@ const { request } = require('express');
 
 //para crear un nuevo usuario
 usersRouter.post('/', async (req, res) =>{
+  console.log("aqui ")
   const {name, email, password} = req.body;
   console.log(req.body);
   

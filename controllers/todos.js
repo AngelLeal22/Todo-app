@@ -3,6 +3,7 @@ const User = require('../models/user');
 const Todo = require('../models/todo');
 
 todosRouter.get('/', async (request, response) => {
+    console.log("chao")
     const user = request.user;
     const todos = await Todo.find({ user: user.id });
     return response.status(200).json(todos);
@@ -31,6 +32,7 @@ todosRouter.delete('/:id', async (request, response) => {
 
     user.todos = user.todos.filter(todo => todo.id !== request.params.id);
     
+    await user.save();
     return response.sendStatus(204);
 })
 

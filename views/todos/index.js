@@ -7,6 +7,8 @@ const totalCountSpan = document.querySelector('.total-count');
 const completedCountSpan = document.querySelector('.completed-count');
 const incompletedCountSpan = document.querySelector('.incompleted-count');
 
+console.log("la vista")
+
 const totalCount = () => {
 	const howMany = document.querySelector('ul').children.length; 
 	totalCountSpan.innerHTML = howMany;
@@ -111,10 +113,12 @@ ul.addEventListener('click', async e => {
 
 ( async () => {
 	try {
+		console.log("antes de data")
 		const { data } = await axios.get('/api/todos', {
 			withCredentials : true
+			
 		});
-		
+		console.log(data)
 		data.forEach(todo => {
 			const listItem = document.createElement('li');
 			listItem.id = todo.id;
@@ -148,6 +152,7 @@ ul.addEventListener('click', async e => {
 		});
 		todoCount();
 	} catch (error) {
-		// window.location.pathname = '/login';
+		 window.location.pathname = '/login';
+		console.log(error)
 	}
 })();
